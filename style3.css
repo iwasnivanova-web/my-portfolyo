@@ -1,0 +1,80 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #1e1e2f, #16213e);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header */
+header {
+  text-align: center;
+  margin-top: 40px;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #ffcc66;
+  text-shadow: 0 0 10px rgba(255, 204, 102, 0.4);
+}
+
+header p {
+  margin-top: 8px;
+  color: #ddd;
+  font-weight: 300;
+}
+
+/* Gallery grid */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 25px;
+  width: 90%;
+  max-width: 1200px;
+  margin: 50px auto;
+}
+
+/* Each photo */
+.photo {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.photo img {
+  width: 100%;
+  height: auto; /* ensures full image is visible */
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Hover effects */
+.photo:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 25px rgba(255, 204, 102, 0.3);
+}
+
+.photo:hover img {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #bbb;
+  font-size: 0.9rem;
+}

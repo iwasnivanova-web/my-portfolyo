@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent: #667eea;
+            --text-primary: #1a1a2e;
+            --text-light: #6b7280;
+            --bg-card: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Jost', sans-serif;
+            background: #0f0c29;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            position: relative;
+            overflow-x: hidden;
+            padding: 40px 20px;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(245, 87, 108, 0.1) 0%, transparent 50%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 1200px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-gradient);
+            border-radius: 18px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .logo::before {
+            content: '✦';
+            font-size: 36px;
+            color: white;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: white;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .portfolio-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            padding: 32px;
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .portfolio-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 24px 72px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+            border-color: rgba(102, 126, 234, 0.2);
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: var(--primary-gradient);
+        }
+
+        .portfolio-card:hover .card-icon::before {
+            filter: brightness(0) invert(1);
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-family: 'Jost', sans-serif;
+        }
+
+        .card-description {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        .logout-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .logout-btn {
+            padding: 14px 36px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Jost', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        .logout-btn:active {
+            transform: translateY(0);
+        }
+
+        .decorative-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .circle-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(102, 126, 234, 0.2);
+            top: -200px;
+            right: -200px;
+        }
+
+        .circle-2 {
+            width: 300px;
+            height: 300px;
+            background: rgba(245, 87, 108, 0.2);
+            bottom: -150px;
+            left: -150px;
+        }
+
+        /* Animation delays for staggered entrance */
+        .portfolio-card:nth-child(1) { animation: fadeInUp 0.8s ease-out 0.1s both; }
+        .portfolio-card:nth-child(2) { animation: fadeInUp 0.8s ease-out 0.2s both; }
+        .portfolio-card:nth-child(3) { animation: fadeInUp 0.8s ease-out 0.3s both; }
+        .portfolio-card:nth-child(4) { animation: fadeInUp 0.8s ease-out 0.4s both; }
+        .portfolio-card:nth-child(5) { animation: fadeInUp 0.8s ease-out 0.5s both; }
+
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <div class="logo"></div>
+        <h1>My Portfolio</h1>
+        <p class="subtitle">My Stuff is Really TUFF </p>
+    </div>
+
+    <div class="portfolio-grid">
+        <div class="portfolio-card" onclick="openPage('collection_album.html')">
+            <div class="card-icon"></div>
+            <div class="card-title">Collection</div>
+            <div class="card-description">My Collection (real tuff)</div>
+        </div>
+
+        <div class="portfolio-card" onclick="openPage('family.html')">
+            <div class="card-icon"></div>
+            <div class="card-title">Family</div>
+            <div class="card-description">Information about My family</div>
+        </div>
+
+        <div class="portfolio-card" onclick="openPage('family_album.html')">
+            <div class="card-icon"></div>
+            <div class="card-title">Family Album</div>
+            <div class="card-description">My album of my family and my Siblings</div>
+        </div>
+
+        <div class="portfolio-card" onclick="openPage('personal_information.html')">
+            <div class="card-icon"></div>
+            <div class="card-title">Personal Info</div>
+            <div class="card-description">My Information about myself</div>
+        </div>
+
+        <div class="portfolio-card" onclick="openPage('personal_album.html')">
+            <div class="card-icon"></div>
+            <div class="card-title">Personal Album</div>
+            <div class="card-description">A Album dedicated to me of course</div>
+        </div>
+    </div>
+
+    <div class="logout-section">
+        <button class="logout-btn" onclick="logout()">Sign Out</button>
+    </div>
+</div>
+
+<div class="decorative-circle circle-1"></div>
+<div class="decorative-circle circle-2"></div>
+
+<script>
+    function logout() {
+        window.location.href = 'login.html';
+    }
+
+    function openPage(file) {
+        window.location.href = file;
+    }
+</script>
+
+</body>
+</html>
